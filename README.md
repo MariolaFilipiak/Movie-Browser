@@ -4,7 +4,7 @@
 The movies browser application was created as a final project in the course from Youcode. The app is used to browse and search for movies, actors, and film crew. 
 
 ## Demo 
-[Movie Browser]([https://mariolafilipiak.github.io/Movie-Browser/])
+[Movie Browser](https://mariolafilipiak.github.io/Movie-Browser/)
 
 
 ## Preview
