@@ -16,7 +16,7 @@ export const Pagination = ({ page, onPageChange, totalPages }) => {
 
   const goToPage = (page) => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page", page);
+    page > 1 ? searchParams.set("page", page) : searchParams.delete("page");
     const newUrl = `${location.pathname}?${searchParams.toString()}`;
     history.push(newUrl);
     onPageChange(page);
@@ -24,8 +24,8 @@ export const Pagination = ({ page, onPageChange, totalPages }) => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page", page);
-    const newUrl = `${location.pathname}?${searchParams.toString()}`;
+    page > 1 ? searchParams.set("page", page) : searchParams.delete("page");
+    const newUrl = `${location.pathname}/${searchParams.toString()}`;
     window.history.pushState({ path: newUrl }, "", newUrl);
   }, [page, location]);
 
@@ -33,7 +33,6 @@ export const Pagination = ({ page, onPageChange, totalPages }) => {
   const goToNext = () => goToPage(page + 1);
   const goToFirst = () => goToPage(1);
   const goToLast = () => goToPage(totalPages);
-
 
   return (
     <Wrapper>
