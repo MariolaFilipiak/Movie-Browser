@@ -12,16 +12,12 @@ export const getQueryData = async (dataName, query, page = 1) => {
 };
 
 export const getPopularData = async (dataName, page, query) => {
-  const { data } = await axios.get(
+  const response = await axios.get(
     `${BASE_URL}/${dataName}/popular?api_key=${API_KEY}&page=${page}&query=${query}`
   );
-  return {
-    people: data.results,
-    movies: data.results,
-    totalPages: data.total_pages,
-    totalResults: data.total_results,
-  };
+  return response.data;
 };
+
 export const getGenres = () =>
   axios
     .get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`)
@@ -41,7 +37,6 @@ export const getMovieCreditsData = async (personId) => {
   console.log(response.data);
   return response.data;
 };
-
 
 export const getMoviePageDetails = async (id) => {
   const response = await axios.get(
