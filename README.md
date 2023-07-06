@@ -42,9 +42,7 @@ Flex
 
 React
 
-Redux
-
-Redux-Saga
+TanStack-Query
 
 ## Getting Started with Create React App
 
