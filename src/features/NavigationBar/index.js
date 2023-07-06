@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect, BrowserRouter, HashRouter } from "react-router-dom";
+import { Switch, Route, Redirect,HashRouter } from "react-router-dom";
 import { Movies } from "../Movie/Movies";
 import { People } from "../People/People";
 import { SearchBar } from "./SearchBar";
