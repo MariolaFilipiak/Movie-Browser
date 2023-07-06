@@ -49,7 +49,7 @@ export const NavigationBar = () => {
         <Route path={toPeople()}>
           <People />
         </Route>
-        <Route path="/Movie-Browser">
+        <Route path="/">
           <Redirect to={toMovies()} />
         </Route>
       </Switch>
