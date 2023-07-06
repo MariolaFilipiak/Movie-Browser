@@ -18,7 +18,7 @@ import { ActorPage } from "../People/ActorPage/ActorPage";
 
 export const NavigationBar = () => {
   return (
-    <BrowserRouter basename="Movie-Browser">
+    <BrowserRouter basename="Movie-Browser/movies">
       <Header>
         <NavBar>
           <NavList>
