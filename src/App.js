@@ -1,9 +1,7 @@
-import { NavigationBar } from "./feature/NavigationBar";
+import { NavigationBar } from "./features/NavigationBar";
 
 function App() {
-  return (
-   <NavigationBar />
-  );
+  return <NavigationBar />;
 }
 
 export default App;

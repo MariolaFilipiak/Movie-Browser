@@ -23,12 +23,14 @@ export const Backdrop = ({ backdrop_path, title, rate, votes }) => {
         />
         <BackdropBox>
           <BackdropTitle>{title}</BackdropTitle>
-          <RatingWrapper><RatingBox>
-            <Icon />
-            <Rate>{rate.toFixed(1).replace(".", ",")}</Rate>
-            <RateOn>/ 10</RateOn>
-          </RatingBox>
-          <Votes>{votes} votes</Votes></RatingWrapper>
+          <RatingWrapper>
+            <RatingBox>
+              <Icon />
+              <Rate>{rate.toFixed(1).replace(".", ",")}</Rate>
+              <RateOn>/ 10</RateOn>
+            </RatingBox>
+            <Votes>{votes} votes</Votes>
+          </RatingWrapper>
         </BackdropBox>
       </BackdropContainer>
     </BackdropWrapper>

@@ -2,7 +2,7 @@ import { ReactComponent as Icon } from "../../../core/icon/Vector.svg";
 import { Genres } from "../../../core/components/Genres";
 import { TextBold, TextNormal } from "../../../core/components/Text";
 import { Image, InfoBox, Rating, RatingBox, Tile, Title, Year } from "./styled";
-import Poster from "../../../feature/Movie/MoviesList/Poster.svg";
+import Poster from "../../../features/Movie/MoviesList/Poster.svg";
 import { toMovie } from "../../NavigationBar/route";
 
 export const MovieTile = ({ movies }) => {

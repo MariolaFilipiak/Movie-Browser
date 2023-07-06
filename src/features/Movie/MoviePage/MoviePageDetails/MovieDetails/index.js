@@ -46,7 +46,9 @@ export const MovieDetails = ({
           {production && (
             <InfoBox>
               <Info>Production:</Info>
-              <Production>{production.map(({ name }) => name).join(", ")}</Production>
+              <Production>
+                {production.map(({ name }) => name).join(", ")}
+              </Production>
             </InfoBox>
           )}
           {release && (
@@ -62,12 +64,14 @@ export const MovieDetails = ({
               ))}
             </GenreBox>
           )}
-          <RatingWrapper><RatingBox>
-            <Icon />
-            <Rate>{rate.toFixed(1).replace(".", ",")}</Rate>
-            <RateOn>/ 10</RateOn>
-          </RatingBox>
-          <Votes>{votes} votes</Votes></RatingWrapper>
+          <RatingWrapper>
+            <RatingBox>
+              <Icon />
+              <Rate>{rate.toFixed(1).replace(".", ",")}</Rate>
+              <RateOn>/ 10</RateOn>
+            </RatingBox>
+            <Votes>{votes} votes</Votes>
+          </RatingWrapper>
         </DetailsBox>
         <Description>{details}</Description>
       </Container>
