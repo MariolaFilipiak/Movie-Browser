@@ -1,22 +1,20 @@
 {
   "files": {
-    "main.js": "/Movie-Browser/static/js/main.baa3a456.js",
-    "static/js/787.f11d52fa.chunk.js": "/Movie-Browser/static/js/787.f11d52fa.chunk.js",
-    "static/media/NoResultImage.svg": "/Movie-Browser/static/media/NoResultImage.d286a671797f1244d0ba26eeaa04cf6f.svg",
-    "static/media/Vector.svg": "/Movie-Browser/static/media/Vector.8663155c38d2739a01d98dddbf5d2ae1.svg",
-    "static/media/Danger.svg": "/Movie-Browser/static/media/Danger.a514e9c64a76d5cf149bdd7443857605.svg",
-    "static/media/noPoster.svg": "/Movie-Browser/static/media/noPoster.fabb13dbc3185115fe07697e3d976c8c.svg",
-    "static/media/Poster.svg": "/Movie-Browser/static/media/Poster.8b204795404be38c177658103d137044.svg",
-    "index.html": "/Movie-Browser/index.html",
-    "static/media/right.svg": "/Movie-Browser/static/media/right.3a3e3d4c33b86c8230064687486164a2.svg",
-    "static/media/video.svg": "/Movie-Browser/static/media/video.9f17415e1301f9ec3430536c50201e6d.svg",
-    "static/media/left.svg": "/Movie-Browser/static/media/left.19570f4adb2da9a394eae2a4dd04a70d.svg",
-    "static/media/loading.svg": "/Movie-Browser/static/media/loading.9c07d0caa328df94fdbb6d76306746f3.svg",
-    "static/media/search.svg": "/Movie-Browser/static/media/search.5aa061ea8ce958db2e2c813d81e21cf7.svg",
-    "main.baa3a456.js.map": "/Movie-Browser/static/js/main.baa3a456.js.map",
-    "787.f11d52fa.chunk.js.map": "/Movie-Browser/static/js/787.f11d52fa.chunk.js.map"
+    "main.js": "/mariolafilipiak.github.io/Movie-Browser/static/js/main.bccd4e0a.js",
+    "static/media/NoResultImage.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/NoResultImage.d286a671797f1244d0ba26eeaa04cf6f.svg",
+    "static/media/Vector.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/Vector.8663155c38d2739a01d98dddbf5d2ae1.svg",
+    "index.html": "/mariolafilipiak.github.io/Movie-Browser/index.html",
+    "static/media/Danger.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/Danger.a514e9c64a76d5cf149bdd7443857605.svg",
+    "static/media/noPoster.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/noPoster.fabb13dbc3185115fe07697e3d976c8c.svg",
+    "static/media/Poster.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/Poster.8b204795404be38c177658103d137044.svg",
+    "static/media/right.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/right.fa6204a8d9a75bbaf59d0f097debef52.svg",
+    "static/media/video.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/video.9f17415e1301f9ec3430536c50201e6d.svg",
+    "static/media/left.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/left.3c74c62a9c6da3dbe76ce4a8caa9acb8.svg",
+    "static/media/loading.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/loading.9c07d0caa328df94fdbb6d76306746f3.svg",
+    "static/media/search.svg": "/mariolafilipiak.github.io/Movie-Browser/static/media/search.5aa061ea8ce958db2e2c813d81e21cf7.svg",
+    "main.bccd4e0a.js.map": "/mariolafilipiak.github.io/Movie-Browser/static/js/main.bccd4e0a.js.map"
   },
   "entrypoints": [
-    "static/js/main.baa3a456.js"
+    "static/js/main.bccd4e0a.js"
   ]
 }
