@@ -18,7 +18,7 @@ import { ActorPage } from "../People/ActorPage/ActorPage";
 
 export const NavigationBar = () => {
   return (
-    <HashRouter basename="/Movie-Browser">
+    <HashRouter>
       <Header>
         <NavBar>
           <NavList>
