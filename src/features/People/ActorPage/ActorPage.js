@@ -1,43 +1,62 @@
-import { useDispatch, useSelector } from "react-redux";
-import { fetchActor, selectActor, selectActorStatus } from "./actorSlice";
+import { useQuery } from "@tanstack/react-query";
 import { NoResult } from "../../Content/NoResult";
 import { Loading } from "../../Content/Loading";
-import { ActorInfo } from "./index";
 import { Error } from "../../Content/Error";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParamName";
-import { useFetchPeople } from "../useFetchPeople";
 import { People } from "../People";
+import { ActorDetails } from "./ActorDetails";
+import { getMovieCreditsData, getPersonData } from "../../../core/getData";
+import { ActorPageDetails } from "./ActorPageDetails";
 
 export const ActorPage = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const actor = useSelector(selectActor(id));
-  const status = useSelector(selectActorStatus);
   const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search || "").get(
     searchQueryParamName
   );
-  useFetchPeople({ dispatch, query, setSearchResults });
-  useEffect(() => {
-    dispatch(fetchActor(id, query));
-  }, [dispatch, id, query]);
 
-  return {
-    initial: null,
-    loading: <Loading />,
-    success: (
-      <>
+  const {
+    data: personDetails,
+    isLoading,
+    isError,
+  } = useQuery(["personDetails", id], () => getPersonData(id));
+
+  const { data: personCredits } = useQuery(["personCredits", id], () =>
+    getMovieCreditsData(id)
+  );
+  useEffect(() => {
+    if (personDetails) {
+      setSearchResults([personDetails]);
+    }
+  }, [personDetails]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
+
+  return (
+    <>
       {query ? (
-        <People people={searchResults} />
+        <>
+          {searchResults.length === 0 ? (
+            <NoResult />
+          ) : (
+            <People people={searchResults} />
+          )}
+        </>
       ) : (
-        <ActorInfo actorInfo={actor} />
+        <ActorPageDetails
+          personCredits={personCredits}
+          personDetails={personDetails}
+        />
       )}
     </>
-  ),
-    error: <Error />,
-    noResult:<NoResult />
-  }[status];
+  );
 };

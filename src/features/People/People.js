@@ -1,14 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import {
-  fetchPeople,
-  selectPeople,
-  selectPeopleStatus,
-  selectPeopleTotalPages,
-  selectPeopleTotalResults,
-} from "./peopleSlice";
+import { useQuery } from "@tanstack/react-query";
 import { PeopleList } from "./PeopleList";
 import { NoResult } from "../Content/NoResult";
 import { Loading } from "../Content/Loading";
@@ -16,41 +8,56 @@ import { Container } from "../../core/components/Container";
 import { Error } from "../Content/Error";
 import { Pagination } from "../../core/components/Pagination";
 import searchQueryParamName from "../NavigationBar/SearchBar/searchQueryParamName";
-import { useFetchPeople } from "./useFetchPeople";
+import { getPopularData, getQueryData } from "../../core/getData";
 
 export const People = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search || "").get(
     searchQueryParamName
   );
-  const dispatch = useDispatch();
-  const peopleStatus = useSelector(selectPeopleStatus);
-  const people = useSelector(selectPeople);
-  const [page, setPage] = useState(1);
-  const totalPages = useSelector(selectPeopleTotalPages);
-  const totalResults = useSelector(selectPeopleTotalResults);
   const [searchResults, setSearchResults] = useState([]);
+  const [page, setPage] = useState(1);
 
-  useFetchPeople({ dispatch, query, page, setSearchResults });
+  const { data, isLoading, isError } = useQuery(["person", page, query], () =>
+    query ? getQueryData("person", query, page) : getPopularData("person", page)
+  );
+
+  useEffect(() => {
+    if (query) {
+      getQueryData("person", query, page).then((data) => {
+        setSearchResults(data.results);
+      });
+    }
+  }, [query, page]);
 
   useEffect(() => {
     setPage(1);
   }, [query]);
 
-  const onPageChange = (page, query) => {
-    setPage(page);
-    dispatch(fetchPeople({ page, query }));
+  const {
+    results: people,
+    total_pages: totalPages,
+    total_results: totalResults,
+  } = data || {};
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
+
+  const onPageChange = (selectedPage) => {
+    setPage(selectedPage);
   };
+
   return (
-    <>
-      {peopleStatus === "loading" ? (
-        <Loading />
-      ) : peopleStatus === "error" ? (
-        <Error />
-      ) : query && searchResults.length === 0 ? (
+    <Container>
+      {query && searchResults.length === 0 ? (
         <NoResult />
       ) : (
-        <Container>
+        <>
           <PeopleList
             people={query ? searchResults : people}
             totalResults={totalResults}
@@ -60,8 +67,8 @@ export const People = () => {
             totalPages={totalPages}
             onPageChange={onPageChange}
           />
-        </Container>
+        </>
       )}
-    </>
+    </Container>
   );
 };

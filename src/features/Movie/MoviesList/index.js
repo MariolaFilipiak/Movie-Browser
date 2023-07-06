@@ -1,13 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParamName";
 import { Wrapper } from "./styled";
 import Header from "../../../core/components/Header";
 import { MovieTile } from "../MovieTile";
-import { selectMovieTotalResults } from "../moviesSlice";
 
-export const MoviesList = ({ movies }) => {
-  const totalResults = useSelector(selectMovieTotalResults);
+export const MoviesList = ({ movies, totalResults }) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search || "").get(
     searchQueryParamName

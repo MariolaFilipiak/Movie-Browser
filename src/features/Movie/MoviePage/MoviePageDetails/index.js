@@ -1,15 +1,12 @@
-import { useSelector } from "react-redux";
-import {
-  selectMoviePageCredits,
-  selectMoviePageDetails,
-} from "../moviePageSlice";
 import { Backdrop } from "./Backdrop";
 import { MovieDetails } from "./MovieDetails";
 import { MovieCredits } from "./MovieCredits";
 
-export const MoviePageDetails = () => {
-  const movieDetails = useSelector(selectMoviePageDetails);
-  const movieCredits = useSelector(selectMoviePageCredits);
+export const MoviePageDetails = ({ movieDetails, movieCredits }) => {
+  if (!movieCredits) {
+    return null;
+  }
+
   const movieCast = movieCredits.cast;
   const movieCrew = movieCredits.crew;
 
@@ -25,22 +22,17 @@ export const MoviePageDetails = () => {
       )}
       {movieDetails.title && (
         <MovieDetails
-        poster_path={movieDetails.poster_path}
-        title={movieDetails.title}
-        release={movieDetails.release_date}
-        production={movieDetails.production_countries}
-        genres={movieDetails.genres}
-        rate={movieDetails.vote_average}
-        votes={movieDetails.vote_count}
-        details={movieDetails.overview}
-    />
-      )}
-      {movieCredits && (
-        <MovieCredits
-        cast={movieCast}
-        crew={movieCrew}
+          poster_path={movieDetails.poster_path}
+          title={movieDetails.title}
+          release={movieDetails.release_date}
+          production={movieDetails.production_countries}
+          genres={movieDetails.genres}
+          rate={movieDetails.vote_average}
+          votes={movieDetails.vote_count}
+          details={movieDetails.overview}
         />
       )}
+      {movieCredits && <MovieCredits cast={movieCast} crew={movieCrew} />}
     </>
   );
 };

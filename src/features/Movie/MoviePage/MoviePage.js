@@ -1,47 +1,65 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../../Content/Loading";
 import { Error } from "../../Content/Error";
-import {
-  fetchMoviePage,
-  selectMoviePageStatus,
-  setMoviePageId,
-} from "./moviePageSlice";
 import { MoviePageDetails } from "./MoviePageDetails";
 import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParamName";
-import { useFetchMovies } from "../useFetchMovies";
 import { Movies } from "../Movies";
 import { NoResult } from "../../Content/NoResult";
+import {
+  getMoviePageCredits,
+  getMoviePageDetails,
+} from "../../../core/getData";
 
 export const MoviePage = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const status = useSelector(selectMoviePageStatus);
   const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search || "").get(
     searchQueryParamName
   );
-  useFetchMovies({ dispatch, query, setSearchResults });
+
+  const {
+    data: movieDetails,
+    isLoading,
+    isError,
+  } = useQuery(["movieDetails", id], () => getMoviePageDetails(id));
+
+  const { data: movieCredits } = useQuery(["movieCredits", id], () =>
+    getMoviePageCredits(id)
+  );
 
   useEffect(() => {
-    dispatch(fetchMoviePage(query));
-    dispatch(setMoviePageId(id, query));
-  }, [id, dispatch, query]);
+    if (movieDetails) {
+      setSearchResults([movieDetails]);
+    }
+  }, [movieDetails]);
 
-  return {
-    loading: <Loading />,
-    success: (
-      <>
-        {query ? (
-          <Movies movies={searchResults} />
-        ) : (
-          <MoviePageDetails  />
-        )}
-      </>
-    ),
-    error: <Error />,
-    noResult:<NoResult />
-  }[status];
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error />;
+  }
+
+  return (
+    <>
+      {query ? (
+        <>
+          {searchResults.length === 0 ? (
+            <NoResult />
+          ) : (
+            <Movies movies={searchResults} />
+          )}
+        </>
+      ) : (
+        <MoviePageDetails
+          movieDetails={movieDetails}
+          movieCredits={movieCredits}
+        />
+      )}
+    </>
+  );
 };
