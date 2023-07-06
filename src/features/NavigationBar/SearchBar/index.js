@@ -24,7 +24,7 @@ export const SearchBar = () => {
         `${location.pathname}?${searchQueryParamName}=${debouncedSearchValue}`
       );
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, history, location.pathname, location.search]);
 
   useEffect(() => {
     setSearchValue("");

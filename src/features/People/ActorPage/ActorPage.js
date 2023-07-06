@@ -6,7 +6,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParamName";
 import { People } from "../People";
-import { ActorDetails } from "./ActorDetails";
 import { getMovieCreditsData, getPersonData } from "../../../core/getData";
 import { ActorPageDetails } from "./ActorPageDetails";
 
