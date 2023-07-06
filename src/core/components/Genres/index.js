@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGenres } from "../../getData";
-import { Tag, Tags, TagsBox } from "../../../feature/Movie/MovieTile/styled";
+import { Tag, Tags, TagsBox } from "../../../features/Movie/MovieTile/styled";
 
 export const Genres = ({ genre_ids }) => {
   const [genres, setGenres] = useState([]);

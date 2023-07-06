@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
+import { Switch, Route, Redirect, BrowserRouter, HashRouter } from "react-router-dom";
 import { Movies } from "../Movie/Movies";
 import { People } from "../People/People";
 import { SearchBar } from "./SearchBar";
@@ -18,7 +18,7 @@ import { ActorPage } from "../People/ActorPage/ActorPage";
 
 export const NavigationBar = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header>
         <NavBar>
           <NavList>
@@ -53,6 +53,6 @@ export const NavigationBar = () => {
           <Redirect to={toMovies()} />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
