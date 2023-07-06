@@ -34,6 +34,7 @@ export const Pagination = ({ page, onPageChange, totalPages }) => {
   const goToFirst = () => goToPage(1);
   const goToLast = () => goToPage(totalPages);
 
+
   return (
     <Wrapper>
       <Button onClick={goToFirst} disabled={page === 1}>
