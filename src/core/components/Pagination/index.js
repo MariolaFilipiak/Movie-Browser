@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { TextBold, TextNormal } from "../Text";
 import {
   Button,
@@ -8,22 +8,33 @@ import {
   RightArrow,
   Wrapper,
 } from "./styled";
+import { useEffect } from "react";
 
-export const Pagination = ({ page, onPageChange, query, totalPages }) => {
+export const Pagination = ({ page, onPageChange,totalPages }) => {
   const history = useHistory();
+  const location=useLocation()
 
-  const goToPage = (newPage) => {
-    const searchParams = new URLSearchParams(history.location.search);
-    searchParams.set("page", newPage);
-    history.push(`${history.location.pathname}?${searchParams.toString()}`);
-    onPageChange(newPage);
+  const goToPage = (page) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", page);
+    const newUrl = `${location.pathname}?${searchParams.toString()}`;
+    history.push(newUrl);
+    onPageChange(page);
   };
 
-  const goToPrev = () => goToPage(page - 1, query);
-  const goToNext = () => goToPage(page + 1, query);
-  const goToFirst = () => goToPage(1, query);
-  const goToLast = () => goToPage(totalPages, query);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", page);
+    const newUrl = `${location.pathname}?${searchParams.toString()}`;
+    window.history.pushState({ path: newUrl }, "", newUrl);
+  }, [page, location]);
 
+  const goToPrev = () => goToPage(page - 1);
+  const goToNext = () => goToPage(page + 1);
+  const goToFirst = () => goToPage(1);
+  const goToLast = () => goToPage(totalPages);
+
+ 
   return (
     <Wrapper>
       <Button onClick={goToFirst} disabled={page === 1}>
