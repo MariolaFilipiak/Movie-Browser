@@ -6,7 +6,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParamName";
 import { People } from "../People";
-import { getCreditsData, getDetails} from "../../../core/getData";
+import { getPersonCreditsData, getDetails } from "../../../core/getData";
 import { ActorPageDetails } from "./ActorPageDetails";
 
 export const ActorPage = () => {
@@ -21,10 +21,10 @@ export const ActorPage = () => {
     data: personDetails,
     isLoading,
     isError,
-  } = useQuery(["personDetails", id], () => getDetails("person",id));
+  } = useQuery(["personDetails", id], () => getDetails("person", id));
 
   const { data: personCredits } = useQuery(["personCredits", id], () =>
-    getCreditsData("person",id)
+    getPersonCreditsData(id)
   );
   useEffect(() => {
     if (personDetails) {
