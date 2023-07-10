@@ -38,8 +38,11 @@ export const getGenres = async () => {
   return response.genres;
 };
 
-export const getCreditsData = async (dataName, id) => {
-  return getData(`${dataName}/${id}/movie_credits`);
+export const getPersonCreditsData = async ( id) => {
+  return getData(`person/${id}/movie_credits`);
+};
+export const getMovieCreditsData = async (id) => {
+  return getData(`movie/${id}/credits`);
 };
 
 export const getDetails = async (dataName, id) => {
