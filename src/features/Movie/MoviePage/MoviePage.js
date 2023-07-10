@@ -8,8 +8,8 @@ import searchQueryParamName from "../../NavigationBar/SearchBar/searchQueryParam
 import { Movies } from "../Movies";
 import { NoResult } from "../../Content/NoResult";
 import {
-  getMoviePageCredits,
-  getMoviePageDetails,
+  getCreditsData,
+  getDetails,
 } from "../../../core/getData";
 
 export const MoviePage = () => {
@@ -24,10 +24,10 @@ export const MoviePage = () => {
     data: movieDetails,
     isLoading,
     isError,
-  } = useQuery(["movieDetails", id], () => getMoviePageDetails(id));
+  } = useQuery(["movieDetails", id], () => getDetails("movie",id));
 
   const { data: movieCredits } = useQuery(["movieCredits", id], () =>
-    getMoviePageCredits(id)
+  getCreditsData("movie",id)
   );
 
   useEffect(() => {

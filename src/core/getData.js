@@ -5,51 +5,43 @@ const API_KEY = "64dcf25583202648eae7e90e51a0966d";
 export const imgBaseUrl = `https://image.tmdb.org/t/p/`;
 
 export const getQueryData = async (dataName, query, page = 1) => {
+  const params = new URLSearchParams({
+    page: page,
+    query: query,
+  });
+
   const response = await axios.get(
-    `${BASE_URL}/search/${dataName}?api_key=${API_KEY}&query=${query}&page=${page}`
+    `${BASE_URL}/search/${dataName}?api_key=${API_KEY}&${params}`
   );
   return response.data;
 };
 
 export const getPopularData = async (dataName, page, query) => {
+  const params = new URLSearchParams({
+    page: page,
+    query: query,
+  });
+
   const response = await axios.get(
-    `${BASE_URL}/${dataName}/popular?api_key=${API_KEY}&page=${page}&query=${query}`
+    `${BASE_URL}/${dataName}/popular?api_key=${API_KEY}&${params}`
   );
   return response.data;
 };
 
-export const getGenres = () =>
-  axios
-    .get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`)
-    .then((response) => response.data.genres);
-
-export const getPersonData = async (personId) => {
-  const response = await axios.get(
-    `${BASE_URL}/person/${personId}?api_key=${API_KEY}`
-  );
+export const getData = async (path) => {
+  const response = await axios.get(`${BASE_URL}/${path}?api_key=${API_KEY}`);
   return response.data;
 };
 
-export const getMovieCreditsData = async (personId) => {
-  const response = await axios.get(
-    `${BASE_URL}/person/${personId}/movie_credits?api_key=${API_KEY}`
-  );
-  console.log(response.data);
-  return response.data;
+export const getGenres = async () => {
+  const response = await getData(`genre/movie/list`);
+  return response.genres;
 };
 
-export const getMoviePageDetails = async (id) => {
-  const response = await axios.get(
-    `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
-  );
-
-  return response.data;
+export const getCreditsData = async (dataName, id) => {
+  return getData(`${dataName}/${id}/movie_credits`);
 };
 
-export const getMoviePageCredits = async (id) => {
-  const response = await axios.get(
-    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`
-  );
-
-  return response.data;
+export const getDetails = async (dataName, id) => {
+  return getData(`${dataName}/${id}`);
 };
