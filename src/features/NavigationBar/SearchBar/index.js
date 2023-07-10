@@ -13,10 +13,14 @@ export const SearchBar = () => {
     ? "people"
     : "movies";
 
+    useEffect(() => {
+      setSearchValue("");
+    }, [location.pathname]);
+  
   useEffect(() => {
     if (debouncedSearchValue.trim() === "") {
       if (location.search !== "") {
-        const newPath = location.pathname.replace(/\d+$/, "");
+        const newPath = location.pathname.replace(/\/\d+$/, "");
         history.replace(newPath);
       }
     } else {
@@ -24,11 +28,8 @@ export const SearchBar = () => {
         `${location.pathname}?${searchQueryParamName}=${debouncedSearchValue}`
       );
     }
-  }, [debouncedSearchValue, history, location.pathname, location.search]);
+  }, [debouncedSearchValue]);
 
-  useEffect(() => {
-    setSearchValue("");
-  }, [location.pathname]);
 
   const onInputChange = ({ target }) => {
     setSearchValue(target.value);
